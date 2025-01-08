@@ -7,7 +7,7 @@ int main(){
   // sets the internal buffer to use for stream operations
   // If buffer is null it turns off buffering
 
-  setbuf(stout, NULL);
+  setbuf(stdout, NULL);
   printf("$ "); //This is what the terminal will use as its prompt
 
   //Wait for user input
