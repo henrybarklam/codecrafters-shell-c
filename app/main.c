@@ -16,6 +16,7 @@ int main(){
   //char * fgets(char *string, int length, FILE * stream)
   fgets(input, 100, stdin); 
   input[strlen(input) -1] = '\0'; // \0 is the NULL character, end of a string
-  printf("%s: command not found", input); // Breaks for all rn
+  printf("%s: command not found\n", input); // Breaks for all rn
+  main();
   return 0;
 }
