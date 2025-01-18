@@ -17,6 +17,10 @@ int main(){
   fgets(input, 100, stdin); 
   input[strlen(input) -1] = '\0'; // \0 is the NULL character, end of a string
   printf("%s: command not found\n", input); // Breaks for all rn
+  char* s1 = "exit";
+  if (strcmp(s1, input) == 0){
+    return 0;
+  }
   main();
   return 0;
 }
