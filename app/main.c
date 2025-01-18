@@ -8,19 +8,30 @@ int main(){
   // sets the internal buffer to use for stream operations
   // If buffer is null it turns off buffering
 
+  char* EXIT_COMMAND = "exit";
   setbuf(stdout, NULL);
   printf("$ ");
 
-  //Wait for user input
   char input[100];
   //char * fgets(char *string, int length, FILE * stream)
   fgets(input, 100, stdin); 
   input[strlen(input) -1] = '\0'; // \0 is the NULL character, end of a string
-  printf("%s: command not found\n", input); // Breaks for all rn
-  char* s1 = "exit";
-  if (strcmp(s1, input) == 0){
+  char* first_command;
+  const char delim[] = " ";
+
+  first_command = strtok(input, delim);
+  // String parsing here to get arguments
+  if (strcmp(EXIT_COMMAND, first_command) == 0){
     return 0;
   }
+
+
+  printf("%s: command not found\n", first_command);
+
+  
+
+  
+
   main();
   return 0;
 }
