@@ -9,6 +9,7 @@ int main(){
   // If buffer is null it turns off buffering
 
   char* EXIT_COMMAND = "exit";
+  char* ECHO_COMMAND = "echo";
   setbuf(stdout, NULL);
   printf("$ ");
 
@@ -16,22 +17,28 @@ int main(){
   //char * fgets(char *string, int length, FILE * stream)
   fgets(input, 100, stdin); 
   input[strlen(input) -1] = '\0'; // \0 is the NULL character, end of a string
-  char* first_command;
   const char delim[] = " ";
 
-  first_command = strtok(input, delim);
+  char* token = strtok(input, delim); //This only gets the first word, need more 
   // String parsing here to get arguments
-  if (strcmp(EXIT_COMMAND, first_command) == 0){
+
+  if (strcmp(EXIT_COMMAND, token) == 0){
     return 0;
   }
-
-
-  printf("%s: command not found\n", first_command);
-
-  
-
-  
-
+  else if (strcmp(ECHO_COMMAND, token) == 0){
+    token = strtok(NULL, " ");
+    char output[100];
+    strcpy(output, "");
+    while(token != NULL){
+      strcat(output, token);
+      strcat(output, " ");
+      token = strtok(NULL, " ");
+    }
+    printf("%s\n", output);
+  }
+  else{
+    printf("%s: command not found\n", token);
+  }
   main();
   return 0;
 }
