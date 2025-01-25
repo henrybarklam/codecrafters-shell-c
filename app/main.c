@@ -80,20 +80,29 @@ int main(){
 
   else if (strcmp(TYPE_COMMAND, token) == 0){
     char * command_to_check = strtok(NULL," ");
-    char * path_directory = strtok(path_copy, ":");
-    bool file_found = false;
-    while(path_directory != NULL){
-      if(check_if_file_in_directory(path_directory,command_to_check)){
-        printf("%s is %s/%s\n", command_to_check, path_directory,command_to_check);
-        file_found = true;
-    }
-      path_directory = strtok(NULL, ":");
-    }
-    if (path_directory == NULL && !file_found){
-      printf("%s: not found\n", command_to_check);  
-    }
-
+    if(command_to_check != NULL){
+      bool is_built_in = false;
+      bool file_found = false;
+      if(contains_string(command_to_check, word_set, sizeof(word_set)/sizeof(word_set[0]))){
+        printf("%s is a shell builtin\n", command_to_check);
+        is_built_in = true;
+      }
+      char * path_directory = strtok(path_copy, ":");
+      if(!is_built_in){
+        while(path_directory != NULL){
+          if(check_if_file_in_directory(path_directory,command_to_check)){
+            printf("%s is %s/%s\n", command_to_check, path_directory,command_to_check);
+            file_found = true;
+      }
+        path_directory = strtok(NULL, ":");
+      }
+      if (path_directory == NULL && !file_found){
+        printf("%s: not found\n", command_to_check);  
+      }
+      }
+      
   }
+    }
   else{
     printf("%s: command not found\n", token);
   }
