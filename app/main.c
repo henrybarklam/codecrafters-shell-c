@@ -31,8 +31,10 @@ int main(){
     strcpy(output, "");
     while(token != NULL){
       strcat(output, token);
-      strcat(output, " ");
       token = strtok(NULL, " ");
+      if(token != NULL ){
+        strcat(output, " ");
+      }
     }
     printf("%s\n", output);
   }
