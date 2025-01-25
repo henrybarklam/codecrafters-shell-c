@@ -84,7 +84,7 @@ int main(){
     bool file_found = false;
     while(path_directory != NULL){
       if(check_if_file_in_directory(path_directory,command_to_check)){
-        printf("%s is %s\n", command_to_check, path_directory);
+        printf("%s is %s/%s", command_to_check, path_directory,command_to_check);
         file_found = true;
     }
       path_directory = strtok(NULL, ":");
