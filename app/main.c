@@ -103,8 +103,38 @@ int main(){
       
   }
     }
+
   else{
-    printf("%s: command not found\n", token);
+    if(token != NULL){
+      char * second_argument = strtok(NULL," ");
+
+      bool file_found = false;
+      char * path_directory = strtok(path_copy, ":");
+
+      while(path_directory != NULL && !file_found){
+        if(check_if_file_in_directory(path_directory,token)){
+          char full_command[1024]; // Buffer for the full path   
+          if(second_argument != NULL){
+            snprintf(full_command, sizeof(full_command), "%s/%s %s", path_directory, token, second_argument); 
+          } 
+          else{
+            snprintf(full_command, sizeof(full_command), "%s/%s", path_directory, token); 
+          }
+          
+          system(full_command);
+          printf("Full command is %s\n", full_command);
+          file_found = true;
+      }
+        path_directory = strtok(NULL, ":");
+      }
+      if (path_directory == NULL && !file_found){
+        printf("%s: not found\n", token);  
+      }
+      
+  
+    }
+
+    // printf("%s: command not found\n", token);
   }
   main();
   return 0;
