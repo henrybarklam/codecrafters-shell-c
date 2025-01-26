@@ -34,8 +34,9 @@ int main(){
   char* TYPE_COMMAND = "type";  
   char* EXIT_COMMAND = "exit";
   char* ECHO_COMMAND = "echo";
+  char* PWD_COMMAND = "pwd";
 
-  char *word_set[] = {TYPE_COMMAND, EXIT_COMMAND, ECHO_COMMAND};
+  const char *word_set[] = {TYPE_COMMAND, EXIT_COMMAND, ECHO_COMMAND, PWD_COMMAND};
   setbuf(stdout, NULL);
   printf("$ ");
 
@@ -104,6 +105,11 @@ int main(){
   }
     }
 
+  else if (strcmp(PWD_COMMAND, token) == 0){
+    char * working_directory = getenv("PWD");
+    printf("%s\n",working_directory);
+  }
+
   else{
     if(token != NULL){
       char * second_argument = strtok(NULL," ");
@@ -131,8 +137,6 @@ int main(){
       
   
     }
-
-    // printf("%s: command not found\n", token);
   }
   main();
   return 0;
