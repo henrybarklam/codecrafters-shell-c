@@ -35,8 +35,9 @@ int main(){
   char* EXIT_COMMAND = "exit";
   char* ECHO_COMMAND = "echo";
   char* PWD_COMMAND = "pwd";
+  char* CHANGE_DIRECTORY = "cd";
 
-  const char *word_set[] = {TYPE_COMMAND, EXIT_COMMAND, ECHO_COMMAND, PWD_COMMAND};
+  const char *word_set[] = {TYPE_COMMAND, EXIT_COMMAND, ECHO_COMMAND, PWD_COMMAND, CHANGE_DIRECTORY};
   setbuf(stdout, NULL);
   printf("$ ");
 
@@ -61,7 +62,6 @@ int main(){
     printf("PATH variable not found\n");
   }
 
-
   if (strcmp(EXIT_COMMAND, token) == 0){
     return 0;
   }
@@ -77,6 +77,16 @@ int main(){
       }
     }
     printf("%s\n", output);
+  }
+
+  else if (strcmp(CHANGE_DIRECTORY, token) == 0){
+    char* new_directory = strtok(NULL, " ");
+    if (access(new_directory, F_OK) == 0){ 
+      setenv("PWD", new_directory,1);
+  } else {
+    printf("cd: %s: No such file or directory\n", new_directory);
+  }
+
   }
 
   else if (strcmp(TYPE_COMMAND, token) == 0){
