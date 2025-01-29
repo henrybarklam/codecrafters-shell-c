@@ -79,8 +79,31 @@ int main(){
     printf("%s\n", output);
   }
 
+// Parse the input out into the directories
+
+
   else if (strcmp(CHANGE_DIRECTORY, token) == 0){
-    char* new_directory = strtok(NULL, " ");
+    char* new_directory = strtok(NULL, " "); // Whole directory
+    char* folder_in_directory = strtok(new_directory, "/"); //Piece out directories
+    char final_directory[100];
+    char* working_directory = getenv("PWD");
+    char* folder_in_working_directory =  strtok(working_directory, "/"); 
+
+    char* single_dot = ".";
+    char* double_dot = "..";
+
+    while(folders_in_directory != NULL){
+      // Cases
+      if(strcmp(single_dot, folders_in_directory)){
+        final_directory += folder_in_directory
+      }
+
+    }
+
+
+
+
+
     if (access(new_directory, F_OK) == 0){ 
       setenv("PWD", new_directory,1);
   } else {
